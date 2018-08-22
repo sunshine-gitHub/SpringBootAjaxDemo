@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="UTF-8">
+<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script type="text/javascript">
+var param;
+var result;
+function getInfo(){
+    $.ajax({
+        url:"../SpringBootAjaxDemo/api/getUserById/"+param,
+        data:"",
+        type:"get",
+        dataType:"json",
+        async:false,
+        error:function(){alert("error");},
+        success:function(data){
+        	result = data;
+        }
+    });
+}   
+function alertInfo(){
+	param =$("input#num").val();
+	console.log(param);
+	getInfo();
+	console.log(result);
+	if(result){
+	document.getElementById("name").innerHTML = result.name;
+	document.getElementById("age").innerHTML = result.age;
+	}
+}
+</script>
+</head>
+<body>
+	<input id="num" type="text" name="number"/>
+	<button onclick="alertInfo()" type="button" >提交</button>
+	<br>
+	<br>
+	name:<span id="name"></span><br>
+	age:<span id="age"></span>
+</body>
+</html>
